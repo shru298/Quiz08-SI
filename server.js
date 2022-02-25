@@ -5,8 +5,8 @@ const port = 3000;
 const swaggerJsdoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
 const cors = require('cors');
-const axios = require('axios');
-const url = require('url');
+const axios = require('axios');//Quiz 09
+const url = require('url');//Quiz 09
 const awsServerlessExpressMiddleware = require('aws-serverless-express/middleware'); //Quiz 09
 const options = {
     swaggerDefinition: {
