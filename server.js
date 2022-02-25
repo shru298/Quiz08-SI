@@ -75,7 +75,7 @@ app.get('/say', function(req, res) {
  
    .then(response => {
        console.log("test" +response.data);
-      res.json(response.data)
+      res.send(response.data)
     })
     .catch(err => res.json({ error: err }))
  })
