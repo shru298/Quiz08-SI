@@ -3,15 +3,18 @@
   "version": "1.0.0",
   "main": "index.js",
   "dependencies": {
+    "aws-serverless-express": "^3.4.0",
+    "axios": "^0.26.0",
+    "body-parser": "^1.19.2",
     "cors": "^2.8.5",
-    "express": "^4.17.2",
+    "express": "^4.17.3",
     "express-validator": "^6.14.0",
     "mariadb": "^2.5.5",
     "pm2": "^5.2.0",
     "swagger-jsdoc": "^6.1.0",
-    "swagger-ui-express": "^4.3.0"
+    "swagger-ui-express": "^4.3.0",
+    "url": "^0.11.0"
   },
-  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
@@ -19,5 +22,13 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shru298/Quiz08-SI.git"
+  },
+  "bugs": {
+    "url": "https://github.com/shru298/Quiz08-SI/issues"
+  },
+  "homepage": "https://github.com/shru298/Quiz08-SI#readme",
   "description": ""
 }

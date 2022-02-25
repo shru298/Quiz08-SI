@@ -1,10 +1,13 @@
+
 const express = require('express');
 const app = express();
 const port = 3000;
 const swaggerJsdoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
 const cors = require('cors');
-
+const axios = require('axios');
+const url = require('url');
+const awsServerlessExpressMiddleware = require('aws-serverless-express/middleware'); //Quiz 09
 const options = {
     swaggerDefinition: {
         openapi:'3.0.0',
@@ -22,6 +25,9 @@ const options = {
 const specs = swaggerJsdoc(options);
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(specs));
 app.use(cors());
+
+app.use(awsServerlessExpressMiddleware.eventContext());//Quiz 09
+
 var bodyParser = require("body-parser");
 
 const mariadb = require('mariadb');
@@ -55,6 +61,26 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 const {body, param, validationResult} = require('express-validator');
+//Quiz 09 code
+app.get('/say', function(req, res) {
+    //Define base url
+    let queryObject = url.parse(req.url, true).search;
+    let apiUrl = "";
+    if(queryObject!=null){
+        apiUrl='https://t9qcqaqs37.execute-api.us-east-1.amazonaws.com/test/say' + queryObject; }
+    else
+        apiUrl='https://t9qcqaqs37.execute-api.us-east-1.amazonaws.com/test/say';
+   //call api and return response
+   axios.get(apiUrl)
+ 
+   .then(response => {
+       console.log("test" +response.data);
+      res.json(response.data)
+    })
+    .catch(err => res.json({ error: err }))
+ })
+ 
+
 
 app.get('/', (request, response) => {
     response.status(200).send("This is not why you're here. Head to /user/:id and replace :id with your user id")
