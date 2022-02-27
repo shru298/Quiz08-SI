@@ -1,19 +1,23 @@
-//Quiz 09 my-fucntion code 
-app.get('/say', function(req, res) {
-    //Define base aws url
-    let queryObject = url.parse(req.url, true).search;
-    let apiUrl = "";
-    if(queryObject!=null){
-        apiUrl='https://t9qcqaqs37.execute-api.us-east-1.amazonaws.com/test/say' + queryObject; }
-    else
-        apiUrl='https://t9qcqaqs37.execute-api.us-east-1.amazonaws.com/test/say';
-   //call api and return response
-   axios.get(apiUrl)
+//Quiz 09 my-fucntion.js code in AWS lambda
+
+'use strict';
+console.log('Loading hello world function');
  
-   .then(response => {
-       console.log("test" +response.data);
-      res.send(response.data)
-    })
-    .catch(err => res.json({ error: err }))
- })
+exports.handler = async (event) => {
+    let keyword = "Please provide a value in the query string parameter in the URL after say?";
+    let responseCode = 200;
+    console.log("request: " + JSON.stringify(event));
+    
+    if (event.queryStringParameters && event.queryStringParameters.keyword) {
+        console.log("Received word: " + event.queryStringParameters.keyword);
+        keyword = event.queryStringParameters.keyword;
+    }
  
+    let responseBody =  `Shruti says, ${keyword}`;
+    let response = {
+        statusCode: responseCode, 
+        body: (responseBody)
+    };
+    console.log("response: " + JSON.stringify(response))
+    return response;
+};
